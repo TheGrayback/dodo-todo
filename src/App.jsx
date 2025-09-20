@@ -1,8 +1,9 @@
 import './app.css';
 import { useState } from 'react';
 import AddTODOForm from './components/addTodoForm';
+import TodoList from './components/todoList';
 
-function TodoList() {
+function TodoApp() {
     const [todos, setTodos] = useState([
         { id: 1, text: 'Learn React', completed: false },
         { id: 2, text: 'Build a To-Do App', completed: false },
@@ -29,15 +30,9 @@ function TodoList() {
                 setNewTodo={setNewTodo}
                 addTodo={addTodo}
             />
-            <ul className="todo-list custom-scrollbar">
-                {todos.map((todo, index) => (
-                    <li key={todo.id} className="todo-item">
-                        {todo.text}
-                    </li>
-                ))}
-            </ul>
+            <TodoList todos={todos} />
         </div>
     );
 }
 
-export default TodoList;
+export default TodoApp;
