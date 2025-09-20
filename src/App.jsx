@@ -1,5 +1,6 @@
 import './app.css';
 import { useState } from 'react';
+import AddTODOForm from './components/addTodoForm';
 
 function TodoList() {
     const [todos, setTodos] = useState([
@@ -12,25 +13,27 @@ function TodoList() {
 
     const addTodo = () => {
         if (newTodo.trim() !== '') {
-            setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }]);
+            setTodos([
+                ...todos,
+                { id: Date.now(), text: newTodo, completed: false },
+            ]);
             setNewTodo('');
         }
-    }
+    };
 
     return (
         <div className="todo-app">
-            <h1 className='todo-label'>My To-Do List</h1>
-            <input
-                type="text"
-                className='todo-input'
-                value={newTodo}
-                onChange={(e) => setNewTodo(e.target.value)}
-                placeholder="Add a new task"
+            <h1 className="todo-label">My To-Do List</h1>
+            <AddTODOForm
+                newTodo={newTodo}
+                setNewTodo={setNewTodo}
+                addTodo={addTodo}
             />
-            <button className='todo-button' onClick={addTodo}>Add</button>
-            <ul className='todo-list'>
+            <ul className="todo-list custom-scrollbar">
                 {todos.map((todo, index) => (
-                    <li key={todo.id} className='todo-item'>{todo.text}</li>
+                    <li key={todo.id} className="todo-item">
+                        {todo.text}
+                    </li>
                 ))}
             </ul>
         </div>
