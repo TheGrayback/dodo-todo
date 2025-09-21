@@ -1,0 +1,6 @@
+/* TodoList.module.css */
+@reference "tailwindcss";
+
+.list {
+    @apply flex max-h-[400px] w-full max-w-md flex-col gap-2 overflow-y-auto pr-4;
+}

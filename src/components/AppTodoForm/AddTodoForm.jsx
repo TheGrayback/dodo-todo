@@ -1,14 +1,15 @@
+import styles from './AddTodoForm.module.css';
+
 function AddTODOForm({ newTodo, setNewTodo, addTodo }) {
     return (
-        <div className="todo-input-container">
+        <div className={styles.todoInputContainer}>
             <input
                 type="text"
-                className="todo-input"
                 value={newTodo}
                 onChange={(e) => setNewTodo(e.target.value)}
                 placeholder="Add a new task"
             />
-            <button className="todo-button" onClick={addTodo}>
+            <button className={styles.todoBtn} onClick={addTodo}>
                 Add
             </button>
         </div>

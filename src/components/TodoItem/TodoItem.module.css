@@ -1,0 +1,25 @@
+@reference "tailwindcss";
+
+.checkbox {
+    @apply h-5 w-5 cursor-pointer;
+}
+
+.item {
+    @apply mb-2 flex flex-row gap-2 w-full max-w-md items-center justify-between rounded bg-white p-4 shadow;
+}
+
+.changeBtn {
+    @apply text-blue-500 hover:text-blue-700 cursor-pointer font-bold;
+}
+
+.deleteBtn {
+    @apply text-red-500 hover:text-red-700 cursor-pointer font-bold;
+}
+
+.btnContainer {
+    @apply flex flex-row gap-2;
+}
+
+.itemText {
+    @apply cursor-grab w-[80%] wrap-anywhere;
+}
