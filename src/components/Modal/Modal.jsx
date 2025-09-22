@@ -1,25 +1,40 @@
+import styles from './Modal.module.css';
+
 function Modal({ editingTodo, setEditingTodo, editTodo }) {
     const handleSave = () => {
-        if (editingTodo.text.trim() !== "") {
+        if (editingTodo.text.trim() !== '') {
             editTodo(editingTodo.id, editingTodo.text);
         }
         setEditingTodo(null);
     };
 
     return (
-        <div className="modal-overlay" onClick={handleSave /* закрытие по клику вне модалки */}>
-            <div className="modal" onClick={(e) => e.stopPropagation()}>
-                <h2>Edit Task</h2>
+        <div className={styles.overlay} onClick={handleSave}>
+            <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+                <h2 className={styles.title}>Edit Task</h2>
                 <input
                     value={editingTodo.text}
                     onChange={(e) =>
                         setEditingTodo({ ...editingTodo, text: e.target.value })
                     }
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            handleSave();
+                        }
+                    }}
                     autoFocus
+                    className={styles.input}
                 />
-                <div className="modal-actions">
-                    <button onClick={handleSave}>Save</button>
-                    <button onClick={() => setEditingTodo(null)}>Cancel</button>
+                <div className={styles.actions}>
+                    <button onClick={handleSave} className={styles.saveBtn}>
+                        Save
+                    </button>
+                    <button
+                        onClick={() => setEditingTodo(null)}
+                        className={styles.cancelBtn}
+                    >
+                        Cancel
+                    </button>
                 </div>
             </div>
         </div>

@@ -3,15 +3,15 @@ import { useState } from 'react';
 import AddTODOForm from './components/AppTodoForm/AddTodoForm';
 import TodoList from './components/TodoList/TodoList';
 import Modal from './components/Modal/Modal';
+import EmptyListPlaceholder from './components/EmptyListPlaceholder/EmptyListPlaceholder';
+import SortControll from './components/SortControll/SortControll';
 
 function TodoApp() {
-    const [todos, setTodos] = useState([
-        { id: 1, text: 'Learn React', completed: false },
-        { id: 2, text: 'Build a To-Do App', completed: false },
-        { id: 3, text: 'Master Next.js', completed: false },
-    ]);
+    const [todos, setTodos] = useState([]);
     const [newTodo, setNewTodo] = useState('');
     const [editingTodo, setEditingTodo] = useState(false);
+    const [filter, setFilter] = useState('all');
+    const [sortCompletedOnTop, setSortCompletedOnTop] = useState(false);
 
     const addTodo = () => {
         if (newTodo.trim() !== '') {
@@ -43,9 +43,20 @@ function TodoApp() {
         setTodos(todos.filter((todo) => todo.id !== id));
     };
 
+    const filteredTodos = todos.filter((todo) => {
+        if (filter === 'completed') return todo.completed;
+        if (filter === 'active') return !todo.completed;
+        return true;
+    });
+
+    const sortedTodos = [...filteredTodos].sort((a, b) => {
+        if (!sortCompletedOnTop) return a.completed - b.completed; // completed внизу
+        return b.completed - a.completed; // completed сверху
+    });
+
     return (
         <div className="todo-app">
-            <h1 className="todo-label">My To-Do List</h1>
+            <h1 className="todo-label">Dodo To-Do</h1>
             {editingTodo && (
                 <Modal
                     editingTodo={editingTodo}
@@ -57,14 +68,26 @@ function TodoApp() {
                 newTodo={newTodo}
                 setNewTodo={setNewTodo}
                 addTodo={addTodo}
+                filter={filter}
+                setFilter={setFilter}
             />
-            <TodoList
-                todos={todos}
-                toggleTodo={toggleTodo}
-                editTodo={editTodo}
-                deleteTodo={deleteTodo}
-                setEditingTodo={setEditingTodo}
+            <SortControll
+                filter={filter}
+                setFilter={setFilter}
+                sortCompletedOnTop={sortCompletedOnTop}
+                setSortCompletedOnTop={setSortCompletedOnTop}
             />
+            {sortedTodos.length === 0 ? (
+                <EmptyListPlaceholder />
+            ) : (
+                <TodoList
+                    todos={sortedTodos}
+                    toggleTodo={toggleTodo}
+                    editTodo={editTodo}
+                    deleteTodo={deleteTodo}
+                    setEditingTodo={setEditingTodo}
+                />
+            )}
         </div>
     );
 }
