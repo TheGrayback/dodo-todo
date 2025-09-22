@@ -7,7 +7,14 @@ import EmptyListPlaceholder from './components/EmptyListPlaceholder/EmptyListPla
 import SortControll from './components/SortControll/SortControll';
 
 function TodoApp() {
-    const [todos, setTodos] = useState([]);
+    const [todos, setTodos] = useState(() => {
+        const savedTodos = localStorage.getItem('todos');
+        return savedTodos ? JSON.parse(savedTodos) : [];
+    });
+    // Sync todos with localStorage
+    useState(() => {
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }, [todos]);
     const [newTodo, setNewTodo] = useState('');
     const [editingTodo, setEditingTodo] = useState(false);
     const [filter, setFilter] = useState('all');
