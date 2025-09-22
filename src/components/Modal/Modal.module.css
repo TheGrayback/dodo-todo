@@ -1,0 +1,54 @@
+@reference "tailwindcss";
+
+.overlay {
+    @apply fixed inset-0 flex items-center justify-center bg-black/50 z-50;
+    animation: fadeIn 0.25s ease-out;
+}
+
+.modal {
+    @apply bg-white rounded-xl shadow-xl w-full max-w-md p-6;
+    animation: scaleIn 0.25s ease-out;
+}
+
+.title {
+    @apply text-lg font-semibold mb-4 text-gray-800;
+}
+
+.input {
+    @apply w-full border border-gray-300 rounded-lg p-2 mb-4 
+           focus:outline-none focus:ring-2 focus:ring-blue-400;
+}
+
+.actions {
+    @apply flex justify-end gap-2;
+}
+
+.saveBtn {
+    @apply px-4 py-2 rounded-lg bg-yellow-500 text-white 
+           hover:bg-yellow-600 transition;
+}
+
+.cancelBtn {
+    @apply px-4 py-2 rounded-lg bg-amber-600 text-white 
+           hover:bg-amber-700 transition;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

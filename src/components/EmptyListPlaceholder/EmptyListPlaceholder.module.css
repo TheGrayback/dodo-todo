@@ -1,0 +1,26 @@
+@reference "tailwindcss";
+
+.container {
+    @apply mt-10 flex flex-col items-center justify-center;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.icon {
+    @apply mb-3 h-12 w-12 text-gray-300;
+}
+
+.text {
+    @apply text-center text-gray-300 italic;
+}
+
+/* простая анимация */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,25 +1,56 @@
 @reference "tailwindcss";
 
-.checkbox {
-    @apply h-5 w-5 cursor-pointer;
-}
-
 .item {
-    @apply mb-2 flex flex-row gap-2 w-full max-w-md items-center justify-between rounded bg-white p-4 shadow;
+    @apply mb-2 flex w-full max-w-md items-center justify-between rounded-lg bg-white p-4 shadow-md transition-all duration-200 hover:scale-[1.05] hover:bg-gray-50 hover:shadow-lg;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
-.changeBtn {
-    @apply text-blue-500 hover:text-blue-700 cursor-pointer font-bold;
-}
-
-.deleteBtn {
-    @apply text-red-500 hover:text-red-700 cursor-pointer font-bold;
-}
-
-.btnContainer {
-    @apply flex flex-row gap-2;
+.checkbox {
+    @apply h-5 w-5 cursor-pointer accent-blue-500;
 }
 
 .itemText {
-    @apply cursor-grab w-[80%] wrap-anywhere;
+    @apply flex-1 px-3 wrap-anywhere transition-colors duration-200;
+}
+
+.item:hover .itemText {
+    @apply text-blue-700;
+}
+
+.completed {
+    @apply text-gray-400 line-through;
+}
+
+.btnContainer {
+    @apply flex flex-row gap-2 opacity-0 transition-opacity duration-200;
+}
+
+.item:hover .btnContainer {
+    @apply opacity-100;
+}
+
+.changeBtn {
+    @apply rounded bg-amber-100 px-2 py-1 font-semibold text-amber-700 transition-colors duration-200 hover:bg-amber-200 hover:text-amber-900;
+}
+
+.deleteBtn {
+    @apply rounded bg-red-100 px-2 py-1 font-semibold text-red-600 transition-colors duration-200 hover:bg-red-200 hover:text-red-800;
+}
+
+.iconBtn {
+    @apply rounded bg-gray-100 p-1 text-gray-600 transition-colors duration-200 hover:bg-red-100 hover:text-red-600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

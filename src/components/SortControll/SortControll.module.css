@@ -1,0 +1,19 @@
+@reference "tailwindcss";
+
+.container {
+    @apply mb-6 flex flex-wrap gap-4 items-center;
+}
+
+.label {
+    @apply flex items-center gap-2 text-white font-medium;
+}
+
+.select {
+    @apply rounded-md bg-gray-700 text-white px-3 py-1
+           border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-400
+           hover:bg-gray-600 transition-colors duration-200;
+}
+
+.sortLabel {
+    @apply ml-auto flex items-center gap-2 text-white font-medium;
+}

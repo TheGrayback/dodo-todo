@@ -1,17 +1,32 @@
+/* App.css */
 @import 'tailwindcss';
 
-.body {
-    @apply bg-stone-600;
+html, body, #root {
+    @apply m-0 p-0 h-screen;
 }
 
 .todo-app {
-    @apply flex min-h-screen flex-col items-center justify-center bg-stone-600;
+    @apply flex flex-col bg-stone-800 min-h-screen items-center;
+    position: relative;
 }
 
 .todo-label {
-    @apply mb-4 text-white;
+    @apply text-white/30 text-4xl font-bold mt-6 mb-10 uppercase;
 }
 
+.todo-container {
+    @apply flex flex-col w-full max-w-md flex-1 overflow-auto px-4;
+}
+
+.add-todo-container {
+    @apply w-full max-w-md px-4 my-4;
+}
+
+.controls-container {
+    @apply w-full max-w-md px-4 mb-6;
+}
+
+/* Scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
     width: 6px;
 }
@@ -24,5 +39,3 @@
 .custom-scrollbar::-webkit-scrollbar-track {
     background: transparent;
 }
-
-

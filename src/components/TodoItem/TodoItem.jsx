@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Trash2, Edit2 } from 'lucide-react'; // импорт иконок
 import styles from './TodoItem.module.css';
 
 function TodoItem({ todo, toggleTodo, deleteTodo, setEditingTodo }) {
@@ -11,19 +11,22 @@ function TodoItem({ todo, toggleTodo, deleteTodo, setEditingTodo }) {
                 className={styles.checkbox}
             />
 
-            <span className={styles.itemText}>{todo.text}</span>
+            <span className={`${styles.itemText} ${todo.completed ? styles.completed : ''}`}>
+                {todo.text}
+            </span>
+
             <div className={styles.btnContainer}>
                 <button
-                    className={styles.changeBtn}
+                    className={styles.iconBtn}
                     onClick={() => setEditingTodo(todo)}
                 >
-                    C
+                    <Edit2 size={16} />
                 </button>
                 <button
-                    className={styles.deleteBtn}
+                    className={styles.iconBtn}
                     onClick={() => deleteTodo(todo.id)}
                 >
-                    D
+                    <Trash2 size={16} />
                 </button>
             </div>
         </li>

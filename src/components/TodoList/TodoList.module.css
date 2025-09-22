@@ -2,5 +2,5 @@
 @reference "tailwindcss";
 
 .list {
-    @apply flex max-h-[400px] w-full max-w-md flex-col gap-2 overflow-y-auto pr-4;
+    @apply flex w-full flex-col gap-2 max-h-full overflow-auto items-center;
 }
