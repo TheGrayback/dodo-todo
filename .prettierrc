@@ -4,5 +4,9 @@
     "plugins": ["prettier-plugin-tailwindcss"],
     "semi": true,
     "singleQuote": true,
-    "trailingComma": "es5"
+    "jsxSingleQuote": true,
+    "trailingComma": "es5",
+    "printWidth": 80,
+    "arrowParens": "always",
+    "endOfLine": "lf"
 }
