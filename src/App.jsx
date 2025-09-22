@@ -1,24 +1,26 @@
 import './app.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AddTODOForm from './components/AppTodoForm/AddTodoForm';
 import TodoList from './components/TodoList/TodoList';
 import Modal from './components/Modal/Modal';
 import EmptyListPlaceholder from './components/EmptyListPlaceholder/EmptyListPlaceholder';
 import SortControll from './components/SortControll/SortControll';
+import { DragDropContext, Droppable } from '@hello-pangea/dnd';
 
 function TodoApp() {
     const [todos, setTodos] = useState(() => {
         const savedTodos = localStorage.getItem('todos');
         return savedTodos ? JSON.parse(savedTodos) : [];
     });
-    // Sync todos with localStorage
-    useState(() => {
+
+    useEffect(() => {
         localStorage.setItem('todos', JSON.stringify(todos));
     }, [todos]);
+
     const [newTodo, setNewTodo] = useState('');
     const [editingTodo, setEditingTodo] = useState(false);
     const [filter, setFilter] = useState('all');
-    const [sortCompletedOnTop, setSortCompletedOnTop] = useState(false);
+    const [sortCompletedOnTop, setSortCompletedOnTop] = useState('default');
 
     const addTodo = () => {
         if (newTodo.trim() !== '') {
@@ -50,20 +52,36 @@ function TodoApp() {
         setTodos(todos.filter((todo) => todo.id !== id));
     };
 
+    const handleDragEnd = (result) => {
+        if (!result.destination) return;
+
+        const reorderedTodos = Array.from(todos);
+        const [movedTodo] = reorderedTodos.splice(result.source.index, 1);
+        reorderedTodos.splice(result.destination.index, 0, movedTodo);
+
+        setTodos(reorderedTodos);
+    };
+
     const filteredTodos = todos.filter((todo) => {
         if (filter === 'completed') return todo.completed;
         if (filter === 'active') return !todo.completed;
         return true;
     });
 
-    const sortedTodos = [...filteredTodos].sort((a, b) => {
-        if (!sortCompletedOnTop) return a.completed - b.completed; // completed внизу
-        return b.completed - a.completed; // completed сверху
-    });
+    let visibleTodos = filteredTodos;
+    if (sortCompletedOnTop === 'top') {
+        visibleTodos = [...filteredTodos].sort(
+            (a, b) => b.completed - a.completed
+        );
+    } else if (sortCompletedOnTop === 'bottom') {
+        visibleTodos = [...filteredTodos].sort(
+            (a, b) => a.completed - b.completed
+        );
+    }
 
     return (
-        <div className="todo-app">
-            <h1 className="todo-label">Dodo To-Do</h1>
+        <div className='todo-app'>
+            <h1 className='todo-label'>Dodo To-Do</h1>
             {editingTodo && (
                 <Modal
                     editingTodo={editingTodo}
@@ -84,16 +102,28 @@ function TodoApp() {
                 sortCompletedOnTop={sortCompletedOnTop}
                 setSortCompletedOnTop={setSortCompletedOnTop}
             />
-            {sortedTodos.length === 0 ? (
+            {visibleTodos.length === 0 ? (
                 <EmptyListPlaceholder />
             ) : (
-                <TodoList
-                    todos={sortedTodos}
-                    toggleTodo={toggleTodo}
-                    editTodo={editTodo}
-                    deleteTodo={deleteTodo}
-                    setEditingTodo={setEditingTodo}
-                />
+                <DragDropContext onDragEnd={handleDragEnd}>
+                    <Droppable droppableId='todos'>
+                        {(provided) => (
+                            <div
+                                {...provided.droppableProps}
+                                ref={provided.innerRef}
+                            >
+                                <TodoList
+                                    todos={visibleTodos}
+                                    toggleTodo={toggleTodo}
+                                    editTodo={editTodo}
+                                    deleteTodo={deleteTodo}
+                                    setEditingTodo={setEditingTodo}
+                                />
+                                {provided.placeholder}
+                            </div>
+                        )}
+                    </Droppable>
+                </DragDropContext>
             )}
         </div>
     );

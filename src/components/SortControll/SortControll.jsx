@@ -21,10 +21,11 @@ function SortControll({ filter, setFilter, sortCompletedOnTop, setSortCompletedO
             <label className={styles.sortLabel}>
                 Completed tasks:
                 <select
-                    value={sortCompletedOnTop ? "top" : "bottom"}
-                    onChange={(e) => setSortCompletedOnTop(e.target.value === "top")}
+                    value={sortCompletedOnTop}
+                    onChange={(e) => setSortCompletedOnTop(e.target.value)}
                     className={styles.select}
                 >
+                    <option value="default">Default</option>
                     <option value="top">On top</option>
                     <option value="bottom">On bottom</option>
                 </select>

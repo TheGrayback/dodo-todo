@@ -2,5 +2,10 @@
 @reference "tailwindcss";
 
 .list {
-    @apply flex w-full flex-col gap-2 max-h-full overflow-auto items-center;
+    @apply flex max-h-full min-w-full flex-col items-center gap-2;
 }
+
+.listItem {
+    @apply w-full;
+}
+
