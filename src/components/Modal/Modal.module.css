@@ -6,17 +6,17 @@
 }
 
 .modal {
-    @apply bg-white rounded-xl shadow-xl w-full max-w-md p-6;
+    @apply bg-[#FDF6F2] rounded-xl shadow-xl w-full max-w-md p-6;
     animation: scaleIn 0.25s ease-out;
 }
 
 .title {
-    @apply text-lg font-semibold mb-4 text-gray-800;
+    @apply text-lg font-semibold mb-4 text-[#7C5A4C];
 }
 
 .input {
-    @apply w-full border border-gray-300 rounded-lg p-2 mb-4 
-           focus:outline-none focus:ring-2 focus:ring-blue-400;
+    @apply w-full border border-[#A6785A] rounded-lg p-2 mb-4 
+           focus:outline-none focus:ring-2 focus:ring-[#C08B70];
 }
 
 .actions {
@@ -24,13 +24,13 @@
 }
 
 .saveBtn {
-    @apply px-4 py-2 rounded-lg bg-yellow-500 text-white 
-           hover:bg-yellow-600 transition;
+    @apply px-4 py-2 rounded-lg bg-[#E7C07D] text-[#4C2E1E] 
+           hover:bg-[#F0D49B] transition;
 }
 
 .cancelBtn {
-    @apply px-4 py-2 rounded-lg bg-amber-600 text-white 
-           hover:bg-amber-700 transition;
+    @apply px-4 py-2 rounded-lg bg-[#D97878] text-[#7C2E2E]
+           hover:bg-[#E88A8A] transition;
 }
 
 @keyframes fadeIn {

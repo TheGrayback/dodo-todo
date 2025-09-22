@@ -1,12 +1,14 @@
 @reference "tailwindcss";
 
 .item {
-    @apply mb-2 flex w-full max-w-md items-center justify-between rounded-lg bg-white p-4 shadow-md transition-all duration-200 hover:scale-[1.05] hover:bg-gray-50 hover:shadow-lg;
+    @apply mb-2 flex w-full items-center justify-between rounded-lg 
+           bg-[#FDF6F2] p-4 shadow-md transition-all duration-200
+           hover:scale-[1.05] hover:bg-[#FAE6DC] hover:shadow-lg;
     animation: fadeIn 0.3s ease-in-out;
 }
 
 .checkbox {
-    @apply h-5 w-5 cursor-pointer accent-blue-500;
+    @apply h-5 w-5 cursor-pointer accent-[#A6785A];
 }
 
 .itemText {
@@ -14,11 +16,11 @@
 }
 
 .item:hover .itemText {
-    @apply text-blue-700;
+    @apply text-[#7C5A4C];
 }
 
 .completed {
-    @apply text-gray-400 line-through;
+    @apply text-[#A58F7B] line-through;
 }
 
 .btnContainer {
@@ -30,18 +32,13 @@
 }
 
 .changeBtn {
-    @apply rounded bg-amber-100 px-2 py-1 font-semibold text-amber-700 transition-colors duration-200 hover:bg-amber-200 hover:text-amber-900;
+    @apply rounded bg-[#E7C07D] p-2 font-semibold text-[#6B4C3B] transition-colors duration-200
+           hover:bg-[#F0D49B] hover:text-[#4C2E1E];
 }
 
 .deleteBtn {
-    @apply rounded bg-red-100 px-2 py-1 font-semibold text-red-600 transition-colors duration-200 hover:bg-red-200 hover:text-red-800;
-}
-
-.iconBtn {
-    @apply rounded bg-gray-100 p-1 text-gray-600 transition-colors duration-200 hover:bg-red-100 hover:text-red-600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @apply rounded bg-[#D97878] p-2 font-semibold text-[#7C2E2E] transition-colors duration-200
+           hover:bg-[#E88A8A] hover:text-[#5C1E1E];
 }
 
 @keyframes fadeIn {

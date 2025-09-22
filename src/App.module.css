@@ -1,29 +1,39 @@
 /* App.css */
 @import 'tailwindcss';
 
-html, body, #root {
-    @apply m-0 p-0 h-screen;
+html,
+body,
+#root {
+    @apply m-0 h-screen p-0;
 }
 
 .todo-app {
-    @apply flex flex-col bg-stone-800 min-h-screen items-center;
+    @apply flex min-h-screen flex-col items-center bg-stone-800;
     position: relative;
 }
 
+.header {
+    @apply my-5 flex flex-row items-center justify-center gap-1;
+}
+
 .todo-label {
-    @apply text-white/30 text-4xl font-bold mt-6 mb-10 uppercase;
+    @apply text-4xl font-bold text-[#ffba7a]/50 uppercase;
+}
+
+.todo-logo {
+    @apply h-15 w-auto self-center;
 }
 
 .todo-container {
-    @apply flex flex-col w-full max-w-md flex-1 overflow-auto px-4;
+    @apply flex w-full max-w-md flex-1 flex-col overflow-auto px-4;
 }
 
 .add-todo-container {
-    @apply w-full max-w-md px-4 my-4;
+    @apply my-4 w-full max-w-md px-4;
 }
 
 .controls-container {
-    @apply w-full max-w-md px-4 mb-6;
+    @apply mb-6 w-full max-w-md px-4;
 }
 
 /* Scrollbar */

@@ -17,13 +17,13 @@ function TodoItem({ todo, toggleTodo, deleteTodo, setEditingTodo }) {
 
             <div className={styles.btnContainer}>
                 <button
-                    className={styles.iconBtn}
+                    className={styles.changeBtn}
                     onClick={() => setEditingTodo(todo)}
                 >
                     <Edit2 size={16} />
                 </button>
                 <button
-                    className={styles.iconBtn}
+                    className={styles.deleteBtn}
                     onClick={() => deleteTodo(todo.id)}
                 >
                     <Trash2 size={16} />
