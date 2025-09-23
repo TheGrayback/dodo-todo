@@ -20,3 +20,6 @@ It demonstrates basic CRUD functionality, drag-and-drop reordering, filtering, a
 - @hello-pangea/dnd (drag & drop)  
 - react-hot-toast (notifications)  
 - uuid (unique IDs for tasks)  
+
+## Credits
+- Dodo favicon from [Flaticon](https://www.flaticon.com/ru/free-icons/)
