@@ -1,12 +1,22 @@
-# React + Vite
+# Dodo To-Do
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple task management app built with **React**, **Vite**, and **TailwindCSS**.  
+It demonstrates basic CRUD functionality, drag-and-drop reordering, filtering, and local storage persistence.
 
-Currently, two official plugins are available:
+## Features
+- Add, edit, and delete tasks  
+- Mark tasks as completed  
+- Filter tasks: All / Active / Completed  
+- Sort completed tasks: top / bottom  
+- Drag & drop to reorder tasks  
+- LocalStorage persistence  
+- Modal for editing tasks  
+- Custom checkboxes, buttons, and toast notifications  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech Stack
+- React 19  
+- Vite  
+- TailwindCSS  
+- @hello-pangea/dnd (drag & drop)  
+- react-hot-toast (notifications)  
+- uuid (unique IDs for tasks)  
