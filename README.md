@@ -22,4 +22,4 @@ It demonstrates basic CRUD functionality, drag-and-drop reordering, filtering, a
 - uuid (unique IDs for tasks)  
 
 ## Credits
-- Dodo favicon from [Flaticon](https://www.flaticon.com/ru/free-icons/)
+- Dodo favicon from [Flaticon](https://www.flaticon.com/ru/free-icon/dodo_6685617/)
