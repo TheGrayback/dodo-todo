@@ -1,5 +1,5 @@
 import styles from './App.module.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import AddTODOForm from './components/AppTodoForm/AddTodoForm';
 import TodoList from './components/TodoList/TodoList';
 import Modal from './components/Modal/Modal';
@@ -9,11 +9,47 @@ import { DragDropContext, Droppable } from '@hello-pangea/dnd';
 import toast, { Toaster } from 'react-hot-toast';
 import { Trash2 } from 'lucide-react';
 
+const checkFromLocalStorage = () => {
+    const savedTodos = localStorage.getItem('todos');
+    return savedTodos ? JSON.parse(savedTodos) : [];
+};
+
+const tasksReducer = (state, action) => {
+    switch (action.type) {
+        case 'ADD_TASK': {
+            return [...state, action.payload];
+        }
+        case 'TOGGLE_TASK': {
+            return state.map((task) =>
+                task.id === action.payload
+                    ? { ...task, completed: !task.completed }
+                    : task
+            );
+        }
+        case 'EDIT_TASK': {
+            return state.map((task) =>
+                task.id === action.payload.id
+                    ? { ...task, text: action.payload.text }
+                    : task
+            );
+        }
+        case 'DELETE_TASK': {
+            return state.filter((task) => task.id !== action.payload);
+        }
+        case 'REORDER_TASKS': {
+            return action.payload;
+        }
+        default:
+            return state;
+    }
+};
+
 function TodoApp() {
-    const [todos, setTodos] = useState(() => {
-        const savedTodos = localStorage.getItem('todos');
-        return savedTodos ? JSON.parse(savedTodos) : [];
-    });
+    const [todos, dispatch] = useReducer(
+        tasksReducer,
+        [],
+        checkFromLocalStorage
+    );
 
     useEffect(() => {
         localStorage.setItem('todos', JSON.stringify(todos));
@@ -24,38 +60,31 @@ function TodoApp() {
     const [filter, setFilter] = useState('all');
     const [sortCompletedOnTop, setSortCompletedOnTop] = useState('default');
 
-    const addTodo = () => {
-        if (newTodo.trim() !== '') {
-            setTodos([
-                ...todos,
-                { id: Date.now(), text: newTodo, completed: false },
-            ]);
-            toast.success('Task added!');
-            setNewTodo('');
-        } else {
-            toast.error('Task cannot be empty!');
-        }
+    const handleAddTodo = () => {
+        if (!newTodo.trim()) return;
+
+        const newTask = {
+            id: Date.now(),
+            text: newTodo.trim(),
+            completed: false,
+        };
+
+        dispatch({ type: 'ADD_TASK', payload: newTask });
+        setNewTodo('');
+        toast.success('Task added!');
     };
 
-    const toggleTodo = (id) => {
-        setTodos(
-            todos.map((todo) =>
-                todo.id === id ? { ...todo, completed: !todo.completed } : todo
-            )
-        );
+    const handleToggleTodo = (id) => {
+        dispatch({ type: 'TOGGLE_TASK', payload: id });
     };
 
-    const editTodo = (id, newText) => {
-        setTodos(
-            todos.map((todo) =>
-                todo.id === id ? { ...todo, text: newText } : todo
-            )
-        );
+    const handleEditTodo = (id, text) => {
+        dispatch({ type: 'EDIT_TASK', payload: { id, text } });
         toast.success('Task updated!');
     };
 
-    const deleteTodo = (id) => {
-        setTodos(todos.filter((todo) => todo.id !== id));
+    const handleDeleteTodo = (id) => {
+        dispatch({ type: 'DELETE_TASK', payload: id });
         toast(
             <div className='flex items-center gap-2'>
                 <Trash2 className='text-red-500' size={24} />
@@ -71,7 +100,7 @@ function TodoApp() {
         const [movedTodo] = reorderedTodos.splice(result.source.index, 1);
         reorderedTodos.splice(result.destination.index, 0, movedTodo);
 
-        setTodos(reorderedTodos);
+        dispatch({ type: 'REORDER_TASKS', payload: reorderedTodos });
     };
 
     const filteredTodos = todos.filter((todo) => {
@@ -286,13 +315,13 @@ function TodoApp() {
                 <Modal
                     editingTodo={editingTodo}
                     setEditingTodo={setEditingTodo}
-                    editTodo={editTodo}
+                    editTodo={handleEditTodo}
                 />
             )}
             <AddTODOForm
                 newTodo={newTodo}
                 setNewTodo={setNewTodo}
-                addTodo={addTodo}
+                addTodo={handleAddTodo}
                 filter={filter}
                 setFilter={setFilter}
             />
@@ -314,9 +343,9 @@ function TodoApp() {
                             >
                                 <TodoList
                                     todos={visibleTodos}
-                                    toggleTodo={toggleTodo}
-                                    editTodo={editTodo}
-                                    deleteTodo={deleteTodo}
+                                    toggleTodo={handleToggleTodo}
+                                    editTodo={handleEditTodo}
+                                    deleteTodo={handleDeleteTodo}
                                     setEditingTodo={setEditingTodo}
                                 />
                                 {provided.placeholder}

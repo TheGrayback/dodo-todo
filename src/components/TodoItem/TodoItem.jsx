@@ -3,7 +3,7 @@ import styles from './TodoItem.module.css';
 
 function TodoItem({ todo, toggleTodo, deleteTodo, setEditingTodo }) {
     return (
-        <li key={todo.id} className={styles.item}>
+        <div key={todo.id} className={styles.item}>
             <input
                 type="checkbox"
                 checked={todo.completed}
@@ -29,7 +29,7 @@ function TodoItem({ todo, toggleTodo, deleteTodo, setEditingTodo }) {
                     <Trash2 size={16} />
                 </button>
             </div>
-        </li>
+        </div>
     );
 }
 
